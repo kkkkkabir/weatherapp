@@ -30,7 +30,7 @@ class _HomeState extends State<Home> {
   bool hasData = false;
   Future getWeather() async {
     var response = await http.get(Uri.parse(
-        "https://api.openweathermap.org/data/2.5/weather?q=Pune&units=metric&appid={YOUR_API_KEY}"));
+        "https://api.openweathermap.org/data/2.5/weather?q=Pune&units=metric&appid=5a43765bd638623dca26642fffa81d6a"));
     var results = jsonDecode(response.body);
     setState(() {
       temp = results['main']['temp'];
