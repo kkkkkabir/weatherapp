@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
 
   Future getWeather() async {
     http.Response response = await http.get(Uri.parse(
-        "https://api.openweathermap.org/data/2.5/weather?q=Pune&appid=5a43765bd638623dca26642fffa81d6a"));
+        "https://api.openweathermap.org/data/2.5/weather?q=Pune&units=metric&appid=5a43765bd638623dca26642fffa81d6a"));
     var results = jsonDecode(response.body);
     setState(() {
       temp = results['main']['temp'];
@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  "52\u00B0",
+                  "${temp.toString()}\u00B0",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 40,
@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: EdgeInsets.only(top: 10.0),
                   child: Text(
-                    "Rain",
+                    currently.toString(),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 14,
@@ -97,22 +97,22 @@ class _HomeState extends State<Home> {
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.thermometerHalf),
                     title: Text("Temperature"),
-                    trailing: Text("52\u00B0"),
+                    trailing: Text("${temp.toString()}\u00B0"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.cloud),
                     title: Text("Weather"),
-                    trailing: Text("Weather"),
+                    trailing: Text(description.toString()),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.sun),
                     title: Text("Humidity"),
-                    trailing: Text("12"),
+                    trailing: Text(humidity.toString()),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.wind),
                     title: Text("Wind Speed"),
-                    trailing: Text("12"),
+                    trailing: Text(windSpeed.toString()),
                   ),
                 ],
               ),
