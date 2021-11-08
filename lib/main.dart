@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
 import 'dart:ui';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:convert';
@@ -19,6 +19,31 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var temp;
+  var description;
+  var currently;
+  var humidity;
+  var windSpeed;
+
+  Future getWeather() async {
+    http.Response response = await http.get(Uri.parse(
+        "https://api.openweathermap.org/data/2.5/weather?q=Pune&appid=5a43765bd638623dca26642fffa81d6a"));
+    var results = jsonDecode(response.body);
+    setState(() {
+      temp = results['main']['temp'];
+      description = results['weather'][0]['description'];
+      currently = results['weather'][0]['main'];
+      humidity = results['main']['humidity'];
+      windSpeed = results['wind']['speed'];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getWeather();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
